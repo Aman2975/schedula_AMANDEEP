@@ -1,10 +1,7 @@
-import {
-  IsString,
-  IsEmail,
-  MinLength,
-} from 'class-validator';
+import { IsEmail, IsString, MinLength } from 'class-validator';
 
 export class RegisterDoctorDto {
+
   @IsString()
   name: string;
 
@@ -14,6 +11,7 @@ export class RegisterDoctorDto {
   @IsString()
   specialization: string;
 
+  @IsString()
   @MinLength(6)
   password: string;
 }

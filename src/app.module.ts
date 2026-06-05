@@ -3,9 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { DoctorsModule } from './doctors/doctors.module';
 import { AuthModule } from './auth/auth.module';
-
 @Module({
   imports: [    
     ConfigModule.forRoot({
@@ -13,8 +11,8 @@ import { AuthModule } from './auth/auth.module';
     }),
 
     DatabaseModule,
-    DoctorsModule,
-    AuthModule,],
+    AuthModule
+    ],
   controllers: [AppController], 
   providers: [AppService],
 })

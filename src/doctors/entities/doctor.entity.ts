@@ -1,23 +1,20 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-} from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('doctors')
 export class Doctor {
+
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ type: 'varchar' })
   name: string;
 
-  @Column({ unique: true })
+  @Column({ type: 'varchar', unique: true })
   email: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   specialization: string;
 
-  @Column()
+  @Column({ type: 'varchar' })
   password_hash: string;
 }

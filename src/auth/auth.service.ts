@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -8,6 +8,7 @@ import { Doctor } from '../doctors/entities/doctor.entity';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { RegisterDoctorDto } from './dto/register-doctor.dto';
 import { LoginDto } from './dto/login.dto';
+import { profile } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -65,29 +66,36 @@ export class AuthService {
   
   async login(dto: LoginDto) {
 
+    
+
     if (dto.role === 'user') {
    
       const user = await this.userRepository.findOne({
         where: { email: dto.email }
       });
-      if (!user) throw new UnauthorizedException('Invalid credentials');
 
+      
+      if (!user) throw new UnauthorizedException('Invalid credentials');
+      
       const isMatch = await bcrypt.compare(dto.password, user.password_hash);
       if (!isMatch) throw new UnauthorizedException('Invalid credentials');
-
+      
       const token = this.jwtService.sign({
         sub: user.id,
         email: user.email,
         role: 'user',               
       });
-
+      
       return { token, role: 'user' };
-
+      
     } else {
       
       const doctor = await this.doctorRepository.findOne({
         where: { email: dto.email }
       });
+
+      // console.log(doctor)
+
       if (!doctor) throw new UnauthorizedException('Invalid credentials');
 
       const isMatch = await bcrypt.compare(dto.password, doctor.password_hash);
@@ -96,10 +104,11 @@ export class AuthService {
       const token = this.jwtService.sign({
         sub: doctor.id,
         email: doctor.email,
-        role: 'doctor',             
+        role: 'doctor',
+
       });
 
-      return { token, role: 'doctor' };
+      return { token, role: 'doctor', profile_completed:doctor.is_profile_completed };
     }
   }
 

@@ -17,4 +17,7 @@ export class Doctor {
 
   @Column({ type: 'varchar' })
   password_hash: string;
+
+  @Column({type:'boolean'})
+  is_profile_completed:boolean
 }

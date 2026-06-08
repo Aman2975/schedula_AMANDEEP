@@ -30,17 +30,17 @@ export class AuthController {
   }
 
 
-  @Get('user/profile')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Role('user')                     
-  getUserProfile(@CurrentUser() currentUser: any) {
-    return this.authService.getUserProfile(currentUser.id);
-  }
+  // @Get('user/profile')
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Role('user')                     
+  // getUserProfile(@CurrentUser() currentUser: any) {
+  //   return this.authService.getUserProfile(currentUser.id);
+  // }
 
-  @Get('doctor/profile')
-  @UseGuards(JwtAuthGuard, RolesGuard)
-  @Role('doctor')                 
-  getDoctorProfile(@CurrentUser() currentUser: any) {
-    return this.authService.getDoctorProfile(currentUser.id);
-  }
+  // @Get('doctor/profile')
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Role('doctor')                 
+  // getDoctorProfile(@CurrentUser() currentUser: any) {
+  //   return this.authService.getDoctorProfile(currentUser.id);
+  // }
 }

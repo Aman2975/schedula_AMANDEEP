@@ -86,7 +86,7 @@ export class AuthService {
         role: 'user',               
       });
       
-      return { token, role: 'user' };
+      return { token, role: 'user',profile_completed:user.is_profile_completed };
       
     } else {
       
@@ -113,24 +113,24 @@ export class AuthService {
   }
 
   
-  async getUserProfile(userId: number) {
-    const user = await this.userRepository.findOne({
-      where: { id: userId }
-    });
-    if (!user) throw new UnauthorizedException('User not found');
+  // async getUserProfile(userId: number) {
+  //   const user = await this.userRepository.findOne({
+  //     where: { id: userId }
+  //   });
+  //   if (!user) throw new UnauthorizedException('User not found');
 
-    const { password_hash, ...result } = user; 
-    return result;
-  }
+  //   const { password_hash, ...result } = user; 
+  //   return result;
+  // }
 
  
-  async getDoctorProfile(doctorId: number) {
-    const doctor = await this.doctorRepository.findOne({
-      where: { id: doctorId }
-    });
-    if (!doctor) throw new UnauthorizedException('Doctor not found');
+  // async getDoctorProfile(doctorId: number) {
+  //   const doctor = await this.doctorRepository.findOne({
+  //     where: { id: doctorId }
+  //   });
+  //   if (!doctor) throw new UnauthorizedException('Doctor not found');
 
-    const { password_hash, ...result } = doctor; 
-    return result;
-  }
+  //   const { password_hash, ...result } = doctor; 
+  //   return result;
+  // }
 }

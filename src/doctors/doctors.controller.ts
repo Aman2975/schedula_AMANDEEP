@@ -6,7 +6,10 @@ import { JwtAuthGuard } from 'src/common/enums/guards/jwt-auth.guard';
 import { RolesGuard } from 'src/common/enums/guards/roles.guard';
 import { Role } from 'src/common/enums/decorators/roles.decorator';
 import { CurrentUser } from 'src/common/enums/decorators/current-user.decorator';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
+
+@ApiBearerAuth('access-token')
 @Controller('doctor')
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Role('dcotor')

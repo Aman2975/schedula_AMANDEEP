@@ -26,5 +26,6 @@ import { Doctor } from '../doctors/entities/doctor.entity';
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy],
+  exports: [JwtModule, JwtStrategy, PassportModule]
 })
 export class AuthModule {}

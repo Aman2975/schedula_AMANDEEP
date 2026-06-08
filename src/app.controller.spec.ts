@@ -1,22 +1,24 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+export class Doctor {}
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-describe('AppController', () => {
-  let appController: AppController;
+@Entity('doctors')
+export class Doctor {
 
-  beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController],
-      providers: [AppService],
-    }).compile();
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    appController = app.get<AppController>(AppController);
-  });
+  @Column({ type: 'varchar' })
+  name: string;
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
-  });
-});
+  @Column({ type: 'varchar', unique: true })
+  email: string;
+
+  @Column({ type: 'varchar' })
+  specialization: string;
+
+  @Column({ type: 'varchar' })
+  password_hash: string;
+
+  @Column({type:'boolean'})
+  is_profile_completed:boolean
+}

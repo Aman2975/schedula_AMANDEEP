@@ -9,21 +9,23 @@ import { CurrentUser } from 'src/common/enums/decorators/current-user.decorator'
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 @ApiBearerAuth('access-token')
-@Controller('user')
-@UseGuards(JwtAuthGuard, RolesGuard)  
-@Role('user')                          
+@Controller('user')                          
 export class UsersController {
 
   constructor(private readonly usersService: UsersService) {}
 
 
   @Get('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)  
+  @Role('user')
   getProfile(@CurrentUser() currentUser: any) {
     return this.usersService.getProfile(currentUser.id);
   }
 
  
   @Post('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)  
+  @Role('user')
   completeProfile(
     @CurrentUser() currentUser: any,
     @Body() dto: CompleteUserProfileDto,
@@ -33,6 +35,8 @@ export class UsersController {
 
 
   @Patch('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)  
+  @Role('user')
   updateProfile(
     @CurrentUser() currentUser: any,
     @Body() dto: UpdateUserDto,

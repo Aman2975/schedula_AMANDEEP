@@ -7,11 +7,21 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-    const config = new DocumentBuilder()
-    .setTitle('My API')
-    .setDescription('API docs')
-    .setVersion('1.0')
-    .build();
+   const config = new DocumentBuilder()
+  .setTitle('Schedula API')
+  .setDescription('Doctor Appointment Booking System')
+  .setVersion('1.0')
+  .addBearerAuth(
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      name: 'Authorization',
+      in: 'header',
+    },
+    'access-token',    
+  )
+  .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api-docs', app, document);

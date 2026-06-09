@@ -12,7 +12,7 @@ export class AuthController {
 
   constructor(private authService: AuthService) {}
 
-  // ─── Public Routes ────────────────────────────
+ 
 
   @Post('register/user')
   registerUser(@Body() dto: RegisterUserDto) {

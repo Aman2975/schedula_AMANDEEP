@@ -9,25 +9,30 @@ import { CurrentUser } from 'src/common/enums/decorators/current-user.decorator'
 import { ApiBearerAuth } from '@nestjs/swagger';
 
 
+
 @ApiBearerAuth('access-token')
 @Controller('doctor')
-@UseGuards(JwtAuthGuard, RolesGuard)
-@Role('dcotor')
 export class DoctorsController {
   constructor(private readonly doctorsService: DoctorsService) {}
 
   
   @Get('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Role('doctor')
   findAll(@CurrentUser() currentUser: any) {
     return this.doctorsService.getDoctorProfile(currentUser.id);
   }
   
   @Post('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Role('doctor')
   create(@CurrentUser() currentUser: any, @Body() dto:CompleteProfileDto) {
     return this.doctorsService.completeDoctorProfile(currentUser.id,dto);
   }
 
   @Patch('profile')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Role('doctor')
   update(@CurrentUser() currentUser: any, @Body() dto:UpdateDoctorDto) {
     return this.doctorsService.updateProfile(currentUser.id,dto);
   }

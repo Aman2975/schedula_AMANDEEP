@@ -34,9 +34,9 @@ async function bootstrap() {
       4. Click **Authorize** button and paste token
     `)
     .setVersion('1.0.0')
-    .setContact('Aman', 'https://iaman.space', 'your@email.com')
+    .setContact('Aman', 'https://iaman.space', 'amansingh2975@email.com')
     .addServer('http://localhost:3000', 'Local Development')
-    .addServer('https://your-render-url.onrender.com', 'Production')
+    .addServer('https://schedulaamandeep-production.up.railway.app', 'Production')
     .addBearerAuth(
       {
         type: 'http',

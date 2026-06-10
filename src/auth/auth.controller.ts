@@ -13,7 +13,7 @@ export class AuthController {
 
   constructor(private authService: AuthService) {}
 
- // POST /auth/register/user
+ // 
   @Post('register/user')
   @ApiOperation({ 
     summary: 'Register a new user',
@@ -37,7 +37,7 @@ export class AuthController {
   }
   
 
-   // POST /auth/register/doctor
+   //
   @Post('register/doctor')
   @ApiOperation({ 
     summary: 'Register a new doctor',
@@ -61,7 +61,7 @@ export class AuthController {
   }
 
 
-  // POST /auth/login
+  // 
   @Post('login')
   @ApiOperation({ 
     summary: 'Login for user or doctor',
@@ -72,7 +72,7 @@ export class AuthController {
       example: {
         email: 'aman@gmail.com',
         password: 'aman@123',
-        role: 'user'            // ← user or doctor
+        role: 'user'            
       }
     }
   })

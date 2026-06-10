@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Body, UseGuards ,Param ,Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CompleteUserProfileDto } from './dto/complete-profile.dto';
 import { UpdateUserDto } from './dto/update-profile.dto';
@@ -7,6 +7,7 @@ import { RolesGuard } from 'src/common/enums/guards/roles.guard';
 import { Role } from 'src/common/enums/decorators/roles.decorator';
 import { CurrentUser } from 'src/common/enums/decorators/current-user.decorator';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { QueryDoctorDto } from './dto/query-doctor.dto';
 
 @ApiBearerAuth('access-token')
 @Controller('user')                          
@@ -21,6 +22,8 @@ export class UsersController {
   getProfile(@CurrentUser() currentUser: any) {
     return this.usersService.getProfile(currentUser.id);
   }
+
+
 
  
   @Post('profile')
@@ -43,4 +46,19 @@ export class UsersController {
   ) {
     return this.usersService.updateProfile(currentUser.id, dto);
   }
+
+  @Get('doctors')
+  @UseGuards(JwtAuthGuard, RolesGuard)  
+  @Role('user')
+searchDoctors(@Query() query: QueryDoctorDto) {
+  return this.usersService.searchDoctors(query);
+}
+
+@Get('doctors/:id')
+@UseGuards(JwtAuthGuard, RolesGuard)  
+@Role('user')
+getDoctorById(@Param('id') id: string) {
+  return this.usersService.getDoctorById(+id); // ← +id converts string to number
+}
+
 }

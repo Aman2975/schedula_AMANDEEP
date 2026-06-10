@@ -76,17 +76,7 @@ export class AuthController {
       }
     }
   })
-  @ApiResponse({ 
-    status: 200, 
-    description: 'Login successful',
-    schema: {
-      example: {
-        token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...',
-        role: 'user'
-      }
-    }
-  })
-  @ApiResponse({ status: 401, description: 'Invalid credentials' })
+  
   @Post('login')                    
   login(@Body() dto: LoginDto) {
     return this.authService.login(dto);

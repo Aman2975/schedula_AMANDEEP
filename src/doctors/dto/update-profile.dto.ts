@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsOptional, Min, Max } from 'class-validator';
 
 export class UpdateDoctorDto {
 
@@ -37,4 +37,10 @@ export class UpdateDoctorDto {
   @IsOptional()
   @IsString()
   clinic_address: string;
+
+  @IsOptional()
+  @IsNumber()
+  @Min(10)
+  @Max(120)
+  slot_duration_minutes: number;
 }

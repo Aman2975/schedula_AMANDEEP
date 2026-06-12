@@ -41,7 +41,8 @@ export class DoctorsController {
         gender: 'male',
         bio: 'Experienced cardiologist with 5 years of practice',
         clinic_name: 'Sharma Heart Clinic',
-        clinic_address: 'Sector 17, Chandigarh'
+        clinic_address: 'Sector 17, Chandigarh',
+        slot_duration_minutes:10
       }
     }
   })

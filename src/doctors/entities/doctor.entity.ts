@@ -51,5 +51,8 @@ export class Doctor {
   @Column({type:'boolean'})
   is_profile_completed:boolean;
 
+  @Column({ type: 'integer', default: 30 })
+  slot_duration_minutes: number;
+
 
 }

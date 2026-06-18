@@ -13,5 +13,6 @@ import { AuthModule } from 'src/auth/auth.module';
   ],
   controllers: [AvailabilityController],
   providers: [AvailabilityService],
+  exports: [TypeOrmModule],
 })
 export class AvailabilityModule {}

@@ -7,6 +7,8 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+
+  // cors origin allow to use api. origin = all IPs
     app.enableCors({
     origin: '*',                     
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -14,7 +16,8 @@ async function bootstrap() {
   });
 
    app.useGlobalPipes(new ValidationPipe());
-// swagger
+
+
   const config = new DocumentBuilder()
     .setTitle('Schedula API')
     .setDescription(`

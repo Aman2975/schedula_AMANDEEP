@@ -23,7 +23,7 @@ export class DoctorsController {
     return this.doctorsService.getDoctorProfile(currentUser.id);
   }
   
-
+// 
   @Post('profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Role('doctor')
@@ -53,6 +53,7 @@ export class DoctorsController {
     return this.doctorsService.completeDoctorProfile(currentUser.id,dto);
   }
 
+  // 
   @Patch('profile')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Role('doctor')

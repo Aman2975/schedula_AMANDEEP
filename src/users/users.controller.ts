@@ -23,7 +23,7 @@ export class UsersController {
   }
 
 
-
+// 
   @Post('profile')
   @UseGuards(JwtAuthGuard, RolesGuard)  
   @Role('user')
@@ -55,7 +55,7 @@ export class UsersController {
     return this.usersService.completeProfile(currentUser.id, dto);
   }
 
-
+// 
   @Patch('profile')
   @UseGuards(JwtAuthGuard, RolesGuard)  
   @Role('user')
@@ -81,6 +81,7 @@ export class UsersController {
     return this.usersService.updateProfile(currentUser.id, dto);
   }
 
+  // 
   @Get('doctors')
   @UseGuards(JwtAuthGuard, RolesGuard)  
   @Role('user')
@@ -98,7 +99,10 @@ searchDoctors(@Query() query: QueryDoctorDto) {
   return this.usersService.searchDoctors(query);
 }
 
-
+// 
+@Get('doctors/:id')
+@UseGuards(JwtAuthGuard, RolesGuard)  
+@Role('user')
 @ApiOperation({ 
     summary: 'Get doctor by ID',
     description: 'Returns complete profile of a specific doctor by their ID'
@@ -125,9 +129,6 @@ searchDoctors(@Query() query: QueryDoctorDto) {
   })
   @ApiResponse({ status: 404, description: 'Doctor not found' })
   @ApiResponse({ status: 401, description: 'Unauthorized' })
-@Get('doctors/:id')
-@UseGuards(JwtAuthGuard, RolesGuard)  
-@Role('user')
 getDoctorById(@Param('id') id: string) {
   return this.usersService.getDoctorById(+id); // ← +id converts string to number
 }

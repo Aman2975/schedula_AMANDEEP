@@ -1,4 +1,4 @@
-import { IsString, IsNumber, IsBoolean, IsOptional } from 'class-validator';
+import { IsString, IsNumber, IsBoolean, IsOptional, Min, Max } from 'class-validator';
 
 export class CompleteProfileDto {
 
@@ -25,4 +25,10 @@ export class CompleteProfileDto {
 
   @IsString()
   clinic_address: string;
+
+  @IsNumber()
+  @Min(10)               
+  @Max(120)              
+  slot_duration_minutes: number;
 }
+

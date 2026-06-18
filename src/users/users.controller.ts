@@ -132,4 +132,44 @@ getDoctorById(@Param('id') id: string) {
   return this.usersService.getDoctorById(+id); // ← +id converts string to number
 }
 
+@Get('doctors/:id/slots')
+@ApiOperation({
+  summary: 'Get doctor available slots',
+  description: 'Returns doctor info and all time slots split by duration. Shows available and booked status'
+})
+@ApiParam({ name: 'id', description: 'Doctor ID', example: 1 })
+@ApiQuery({ name: 'date', required: true, description: 'Date in YYYY-MM-DD format', example: '2026-06-16' })
+@ApiResponse({
+  status: 200,
+  description: 'Slots returned successfully',
+  schema: {
+    example: {
+      doctor: {
+        id: 1,
+        name: 'Dr. Rahul Sharma',
+        specialization: 'Cardiologist',
+        consultation_fee: 500,
+        slot_duration_minutes: 30
+      },
+      date: '2026-06-16',
+      available: true,
+      total_slots: 4,
+      available_slots: 3,
+      booked_slots: 1,
+      slots: [
+        { start: '10:00', end: '10:30', status: 'available' },
+        { start: '10:30', end: '11:00', status: 'booked' },
+        { start: '11:00', end: '11:30', status: 'available' },
+        { start: '11:30', end: '12:00', status: 'available' }
+      ]
+    }
+  }
+})
+getDoctorSlots(
+  @Param('id') id: string,
+  @Query('date') date: string
+) {
+  return this.usersService.getDoctorSlots(+id, date);
+}
+
 }
